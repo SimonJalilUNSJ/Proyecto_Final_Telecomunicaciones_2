@@ -13,7 +13,7 @@ void loop() {
     Serial.write(miBT.read());
 
   if (Serial.available()) //Lee Arduino y envia a BT
-    miBT.write(Serial.read())
+    miBT.write(Serial.read());
    
   
 }
