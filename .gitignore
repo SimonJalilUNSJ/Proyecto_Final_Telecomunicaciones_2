@@ -1,0 +1,8 @@
+#Archivos a ignorar
+encoder/
+encoder_menu/
+lcd/
+lcd_alarma/
+lcd_conteo/
+lcd_cursor/
+lcd_scroll/
