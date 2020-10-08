@@ -1,8 +1,8 @@
 #Archivos a ignorar
-encoder/
-encoder_menu/
-lcd/
-lcd_alarma/
-lcd_conteo/
-lcd_cursor/
-lcd_scroll/
+encoder/encoder.ino
+encoder_menu/encode_menu.ino
+lcd/lcd.ino
+lcd_alarma/lcd_alarma.ino
+lcd_conteo/lcd_conteo.ino
+lcd_cursor/lcd_cursor.ino
+lcd_scroll/lcd_scroll.ino
