@@ -35,31 +35,31 @@ void loop() {
       lcd.print("Lat: ");
       lcd.setCursor(0,1);
       lcd.print("Long: ");
-      lcd.clear();
+      //lcd.clear();
       Serial.println("Latitud y longitud");
       break;
     case 1:
       lcd.setCursor(0,0);
       lcd.print("Dia: ");
-      lcd.clear();
+      //lcd.clear();
       Serial.println("Dia");
       break;
     case 2:
       lcd.setCursor(0,0);
       lcd.print("Cant satelites:");
-      lcd.clear();
+      //lcd.clear();
       Serial.println("Cantidad Satelites");
       break;
     case 3:
       lcd.setCursor(0,0);
       lcd.print("Altura: ");
-      lcd.clear();
+      //lcd.clear();
       Serial.println("Altura");
       break;
     default:
       lcd.setCursor(0,0);
       lcd.print("Hora: ");
-      lcd.clear();
+      //lcd.clear();
       Serial.println("Hora");
       break;
 }
@@ -72,8 +72,10 @@ void loop() {
 void encoder(){
   static unsigned long ultimaInterrupcion = 0;
   unsigned long tiempoInterrupcion = millis();
-
-  if (tiempoInterrupcion - ultimaInterrupcion > 5){
+  
+  lcd.clear();
+ 
+  if (tiempoInterrupcion - ultimaInterrupcion > 20){
     if (digitalRead(clk) == HIGH)
       posicion++;
     else 
