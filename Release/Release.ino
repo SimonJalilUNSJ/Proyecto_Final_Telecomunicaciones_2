@@ -1,7 +1,8 @@
-#include <LiquidCrystal.h>
+#include <LiquidCrystal_I2C.h>
+#include <LCD.h>
+#include <Wire.h>
 
-//LiquidCrystal lcd(7,6,5,4,3,2);
-LiquidCrystal lcd(10,9,8,7,6,5);
+LiquidCrystal_I2C lcd (0x27, 2, 1, 0, 4, 5, 6, 7); //Dir,E,RW,RS,D4,D5,D6,D7
 
 #define dt 2
 #define clk 4 
@@ -13,10 +14,16 @@ void setup(){
   pinMode(dt,INPUT);
   pinMode(clk,INPUT);
   Serial.begin(9600);
+  
   attachInterrupt(digitalPinToInterrupt(dt),encoder,LOW);
+  
   Serial.println("Listo:");
 
-  lcd.begin(16,02);
+  lcd.setBacklightPin(3,POSITIVE);
+  lcd.setBacklight(HIGH);
+  lcd.begin(16,2);
+  lcd.clear();
+  
 
   lcd.setCursor(0,0);
   lcd.print("ProyTeleco2");
@@ -31,36 +38,41 @@ void loop() {
 
   switch (posicion) {
     case 0:
+      lcd.clear();
       lcd.setCursor(0,0);
       lcd.print("Lat: ");
       lcd.setCursor(0,1);
       lcd.print("Long: ");
-      //lcd.clear();
       Serial.println("Latitud y longitud");
+      delay(750);
       break;
     case 1:
+      lcd.clear();
       lcd.setCursor(0,0);
       lcd.print("Dia: ");
-      //lcd.clear();
       Serial.println("Dia");
+      delay(750);
       break;
     case 2:
+      lcd.clear();
       lcd.setCursor(0,0);
       lcd.print("Cant satelites:");
-      //lcd.clear();
       Serial.println("Cantidad Satelites");
+      delay(750);
       break;
     case 3:
+      lcd.clear();
       lcd.setCursor(0,0);
       lcd.print("Altura: ");
-      //lcd.clear();
       Serial.println("Altura");
+      delay(750);
       break;
     default:
+      lcd.clear();
       lcd.setCursor(0,0);
       lcd.print("Hora: ");
-      //lcd.clear();
       Serial.println("Hora");
+      delay(750);
       break;
 }
   
@@ -72,9 +84,7 @@ void loop() {
 void encoder(){
   static unsigned long ultimaInterrupcion = 0;
   unsigned long tiempoInterrupcion = millis();
-  
-  lcd.clear();
- 
+   
   if (tiempoInterrupcion - ultimaInterrupcion > 20){
     if (digitalRead(clk) == HIGH)
       posicion++;
